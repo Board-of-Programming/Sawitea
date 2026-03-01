@@ -37,7 +37,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: apps/api/Dockerfile
+      dockerfile: Dockerfile.api
     container_name: sawitea-api
     environment:
       - NODE_ENV=production
@@ -55,17 +55,12 @@ services:
         condition: service_healthy
     networks:
       - sawitea-network
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   # Frontend Web
   web:
     build:
       context: .
-      dockerfile: apps/web/Dockerfile
+      dockerfile: Dockerfile.web
     container_name: sawitea-web
     environment:
       - NODE_ENV=production
@@ -75,8 +70,7 @@ services:
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - BETTER_AUTH_URL=${BETTER_AUTH_URL:-http://localhost:3001}
     depends_on:
-      api:
-        condition: service_healthy
+      - api
     networks:
       - sawitea-network
 
