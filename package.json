@@ -15,10 +15,10 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean && rm -rf node_modules",
-    "db:generate": "cd packages/database && npm run db:generate",
-    "db:migrate": "cd packages/database && npm run db:migrate",
-    "db:push": "cd packages/database && npm run db:push",
-    "db:studio": "cd packages/database && npm run db:studio",
+    "db:generate": "yarn workspace @sawitea/database db:generate",
+    "db:migrate": "yarn workspace @sawitea/database db:migrate",
+    "db:push": "yarn workspace @sawitea/database db:push",
+    "db:studio": "yarn workspace @sawitea/database db:studio",
     "test": "turbo test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
@@ -28,7 +28,7 @@
     "prettier": "^3.0.0"
   },
   "engines": {
-    "node": ">=20.0.0",
-    "npm": ">=10.0.0"
-  }
+    "node": ">=20.0.0"
+  },
+  "packageManager": "yarn@1.22.22"
 }

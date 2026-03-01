@@ -6,12 +6,12 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY package.json package-lock.json* ./
+# Install dependencies
+COPY package.json yarn.lock ./
 COPY apps/web/package.json ./apps/web/
 COPY packages/database/package.json ./packages/database/
 COPY packages/shared/package.json ./packages/shared/
-RUN npm ci
+RUN yarn install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -21,7 +21,9 @@ COPY . .
 
 # Build the application
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build --workspace=@sawitea/web
+RUN yarn workspace @sawitea/database build
+RUN yarn workspace @sawitea/shared build
+RUN yarn workspace @sawitea/web build
 
 # Production image, copy all the files and run next
 FROM base AS runner

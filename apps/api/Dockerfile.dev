@@ -7,23 +7,23 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json* ./
+COPY package.json yarn.lock ./
 COPY apps/api/package.json ./apps/api/
 COPY packages/database/package.json ./packages/database/
 COPY packages/shared/package.json ./packages/shared/
 
 # Install dependencies
-RUN npm ci
+RUN yarn install --frozen-lockfile
 
 # Copy source code
 COPY . .
 
 # Build database package first
-RUN npm run build --workspace=@sawitea/database
+RUN yarn workspace @sawitea/database build
 
 EXPOSE 3001
 
 ENV PORT=3001
 ENV NODE_ENV=development
 
-CMD ["npm", "run", "start:dev", "--workspace=api"]
+CMD ["yarn", "workspace", "@sawitea/api", "start:dev"]

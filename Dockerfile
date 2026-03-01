@@ -16,15 +16,14 @@ WORKDIR /app
 FROM base AS deps
 
 # Copy package files
-COPY package.json package-lock.json* ./
+COPY package.json yarn.lock ./
 COPY apps/api/package.json ./apps/api/
 COPY apps/web/package.json ./apps/web/
 COPY packages/database/package.json ./packages/database/
 COPY packages/shared/package.json ./packages/shared/
-COPY packages/database/drizzle.config.ts ./packages/database/
 
 # Install all dependencies
-RUN npm ci
+RUN yarn install --frozen-lockfile
 
 # ============================================
 # Builder Stage
@@ -33,25 +32,23 @@ FROM base AS builder
 
 # Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/apps ./apps
-COPY --from=deps /app/packages ./packages
-COPY --from=deps /app/package.json ./package.json
-COPY --from=deps /app/package-lock.json* ./package-lock.json*
+COPY --from=deps /app/apps/api/node_modules ./apps/api/node_modules
+COPY --from=deps /app/apps/web/node_modules ./apps/web/node_modules
+COPY --from=deps /app/packages/database/node_modules ./packages/database/node_modules
+COPY --from=deps /app/packages/shared/node_modules ./packages/shared/node_modules
 
 # Copy source code
+COPY package.json yarn.lock ./
 COPY apps ./apps
 COPY packages ./packages
 COPY turbo.json ./turbo.json
 
-# Build packages
+# Build packages first, then apps
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build --workspace=@sawitea/database
-
-# Build API
-RUN npm run build --workspace=@sawitea/api
-
-# Build Web
-RUN npm run build --workspace=@sawitea/web
+RUN yarn workspace @sawitea/database build
+RUN yarn workspace @sawitea/shared build
+RUN yarn workspace @sawitea/api build
+RUN yarn workspace @sawitea/web build
 
 # ============================================
 # API Production Stage
@@ -93,6 +90,10 @@ RUN adduser --system --uid 1001 nextjs
 
 # Copy built application
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./public
+
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./.next/static
 

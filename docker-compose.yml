@@ -67,7 +67,7 @@ services:
         condition: service_healthy
     networks:
       - sawitea-network
-    command: npm run start:dev --workspace=api
+    command: yarn workspace @sawitea/api start:dev
 
   # Frontend (Development)
   web:
@@ -92,7 +92,7 @@ services:
       - api
     networks:
       - sawitea-network
-    command: npm run dev --workspace=web
+    command: yarn workspace @sawitea/web dev
 
 volumes:
   postgres-data:
