@@ -1,0 +1,27 @@
+# Development Dockerfile for Web
+FROM node:20-alpine
+
+# Install necessary packages
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json* ./
+COPY apps/web/package.json ./apps/web/
+COPY packages/database/package.json ./packages/database/
+COPY packages/shared/package.json ./packages/shared/
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+EXPOSE 3000
+
+ENV PORT=3000
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+
+CMD ["npm", "run", "dev", "--workspace=web"]
