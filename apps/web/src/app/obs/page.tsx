@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { getSocket, joinStreamerRoom } from "@/lib/socket";
@@ -14,7 +14,7 @@ interface Donation {
   message?: string;
 }
 
-export default function ObsOverlayPage() {
+function ObsOverlayContent() {
   const searchParams = useSearchParams();
   const streamerId = searchParams.get("streamerId");
   const [donations, setDonations] = useState<Donation[]>([]);
@@ -50,7 +50,7 @@ export default function ObsOverlayPage() {
       const next = donations[0];
       setCurrentDonation(next);
       setDonations((prev) => prev.slice(1));
-      
+
       // Play sound
       sound?.play();
 
@@ -106,7 +106,7 @@ export default function ObsOverlayPage() {
                 </motion.div>
               </div>
             </div>
-            
+
             {currentDonation.message && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -121,8 +121,8 @@ export default function ObsOverlayPage() {
             )}
 
             {/* Decorative elements */}
-            <div className="absolute -top-2 -right-2 text-4xl">✨</div>
-            <div className="absolute -bottom-2 -left-2 text-2xl">💎</div>
+            <div className="absolute -top-2 -right-2 text-4xl">&#10024;</div>
+            <div className="absolute -bottom-2 -left-2 text-2xl">&#128142;</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -138,5 +138,13 @@ export default function ObsOverlayPage() {
         </motion.div>
       )}
     </div>
+  );
+}
+
+export default function ObsOverlayPage() {
+  return (
+    <Suspense fallback={null}>
+      <ObsOverlayContent />
+    </Suspense>
   );
 }
