@@ -80,12 +80,7 @@ export class DonationProcessor {
       }
 
       // Emit WebSocket event for OBS
-      this.donationGateway.emitNewDonation(streamerId, {
-        id: donationId,
-        donorName,
-        amount,
-        message,
-      });
+      this.donationGateway.emitNewDonation(streamerId, updatedDonation[0]);
 
       console.log(`[Donation] Completed and emitted: ${donationId}`);
     }

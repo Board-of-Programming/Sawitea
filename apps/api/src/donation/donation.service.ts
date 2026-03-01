@@ -37,10 +37,6 @@ export class DonationService {
       donorMessage: createDonationDto.donorMessage || null,
       isAnonymous: createDonationDto.isAnonymous || false,
       amount: amount.toString(),
-      platformFee: "0", // Fee calculation handled by Mayar.id
-      gatewayFee: "0",
-      totalAmount: amount.toString(), // Total = amount (Mayar handles fees separately)
-      paymentMethod: "mayar",
       status: "pending",
     }).returning();
 
