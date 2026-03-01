@@ -48,6 +48,10 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN yarn workspace @sawitea/database build
 RUN yarn workspace @sawitea/shared build
 RUN yarn workspace @sawitea/api build
+
+# Verify API build output exists
+RUN ls -la /app/apps/api/dist/ && test -f /app/apps/api/dist/main.js
+
 RUN yarn workspace @sawitea/web build
 
 # ============================================
