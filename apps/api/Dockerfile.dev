@@ -1,0 +1,29 @@
+# Development Dockerfile for API
+FROM node:20-alpine
+
+# Install necessary packages
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json* ./
+COPY apps/api/package.json ./apps/api/
+COPY packages/database/package.json ./packages/database/
+COPY packages/shared/package.json ./packages/shared/
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Build database package first
+RUN npm run build --workspace=@sawitea/database
+
+EXPOSE 3001
+
+ENV PORT=3001
+ENV NODE_ENV=development
+
+CMD ["npm", "run", "start:dev", "--workspace=api"]
