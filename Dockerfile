@@ -62,9 +62,9 @@ ENV PORT=3001
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nestjs
 
-# Copy built application
-COPY --from=builder --chown=nestjs:nodejs /app/apps/api/dist ./dist
-COPY --from=builder --chown=nestjs:nodejs /app/apps/api/package.json ./
+# Copy built application (maintain monorepo structure for relative imports)
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/dist ./apps/api/dist
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/package.json ./apps/api/package.json
 COPY --from=builder --chown=nestjs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nestjs:nodejs /app/packages ./packages
 
@@ -72,6 +72,7 @@ USER nestjs
 
 EXPOSE 3001
 
+WORKDIR /app/apps/api
 CMD ["node", "dist/main"]
 
 # ============================================
@@ -89,16 +90,14 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy built application
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
 
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
+# Standalone output preserves monorepo structure
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
 
 USER nextjs
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["node", "apps/web/server.js"]
