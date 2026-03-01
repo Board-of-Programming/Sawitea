@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body, Param, Put, Session } from "@nestjs/common";
-import { AllowAnonymous, UserSession } from "@thallesp/nestjs-better-auth";
+import { AllowAnonymous } from "@thallesp/nestjs-better-auth";
+import type { UserSession } from "@thallesp/nestjs-better-auth";
 import { StreamerService } from "./streamer.service";
 import { CreateStreamerDto } from "./dto/create-streamer.dto";
 

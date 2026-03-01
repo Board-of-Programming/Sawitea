@@ -74,6 +74,7 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+.claude
 
 # ================================
 # Drizzle

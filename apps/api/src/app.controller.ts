@@ -1,8 +1,10 @@
 import { Controller, Get, Inject } from "@nestjs/common";
-import { AllowAnonymous, OptionalAuth, Session, UserSession } from "@thallesp/nestjs-better-auth";
+import { AllowAnonymous, OptionalAuth, Session } from "@thallesp/nestjs-better-auth";
+import type { UserSession } from "@thallesp/nestjs-better-auth";
 import { eq } from "drizzle-orm";
-import { DRIZZLE, DrizzleDB } from "./database";
-import { user } from "@sawitria/database/schema";
+import { DRIZZLE } from "./database";
+import type { DrizzleDB } from "./database";
+import { user } from "@sawitea/database/schema";
 import { AppService } from "./app.service";
 
 @Controller()

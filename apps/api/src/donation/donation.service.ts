@@ -1,9 +1,10 @@
 import { Injectable, Inject, NotFoundException } from "@nestjs/common";
 import { InjectQueue } from "@nestjs/bull";
-import { Queue } from "bull";
+import type { Queue } from "bull";
 import { eq, desc } from "drizzle-orm";
-import { DRIZZLE, DrizzleDB } from "../database";
-import { donation, streamer } from "@sawitria/database/schema";
+import { DRIZZLE } from "../database";
+import type { DrizzleDB } from "../database";
+import { donation, streamer } from "@sawitea/database/schema";
 import { CreateDonationDto } from "./dto/create-donation.dto";
 import { randomUUID } from "crypto";
 

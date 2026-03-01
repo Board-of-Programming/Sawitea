@@ -1,7 +1,8 @@
 import { Injectable, Inject, NotFoundException } from "@nestjs/common";
 import { eq, desc } from "drizzle-orm";
-import { DRIZZLE, DrizzleDB } from "../database";
-import { streamer, donation } from "@sawitria/database/schema";
+import { DRIZZLE } from "../database";
+import type { DrizzleDB } from "../database";
+import { streamer, donation } from "@sawitea/database/schema";
 import { CreateStreamerDto } from "./dto/create-streamer.dto";
 import { randomUUID } from "crypto";
 

@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { BullModule } from "@nestjs/bull";
 import { AuthModule } from "@thallesp/nestjs-better-auth";
-import { auth } from "@sawitria/database";
+import { auth } from "@sawitea/database";
 import { DatabaseModule } from "./database";
 import { WebsocketModule } from "./websocket/websocket.module";
 import { DonationModule } from "./donation/donation.module";

@@ -7,7 +7,7 @@ import {
 } from "@nestjs/websockets";
 import { Server, Socket } from "socket.io";
 import { Logger } from "@nestjs/common";
-import { Donation } from "@sawitria/database/schema";
+import type { Donation } from "@sawitea/database/schema";
 
 @WebSocketGateway({
   cors: {

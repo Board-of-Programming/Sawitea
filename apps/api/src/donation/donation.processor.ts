@@ -1,9 +1,10 @@
 import { Processor, Process } from "@nestjs/bull";
-import { Job } from "bull";
+import type { Job } from "bull";
 import { Inject } from "@nestjs/common";
 import { eq } from "drizzle-orm";
-import { DRIZZLE, DrizzleDB } from "../database";
-import { donation, streamer } from "@sawitria/database/schema";
+import { DRIZZLE } from "../database";
+import type { DrizzleDB } from "../database";
+import { donation, streamer } from "@sawitea/database/schema";
 import { DonationGateway } from "../websocket/donation.gateway";
 
 interface PaymentJobData {
