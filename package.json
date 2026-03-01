@@ -1,0 +1,34 @@
+{
+  "name": "sawitea-monorepo",
+  "version": "1.0.0",
+  "description": "Sawitea - Platform donasi untuk streamer Indonesia. Alternatif open source untuk Saweria.co",
+  "private": true,
+  "author": "Sawitea Team",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "type-check": "turbo type-check",
+    "clean": "turbo clean && rm -rf node_modules",
+    "db:generate": "cd packages/database && npm run db:generate",
+    "db:migrate": "cd packages/database && npm run db:migrate",
+    "db:push": "cd packages/database && npm run db:push",
+    "db:studio": "cd packages/database && npm run db:studio",
+    "test": "turbo test",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

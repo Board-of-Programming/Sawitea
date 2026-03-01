@@ -1,0 +1,13 @@
+"use strict";
+// Database seeder for initial data
+// Run with: npx ts-node src/seed.ts
+Object.defineProperty(exports, "__esModule", { value: true });
+async function seed() {
+    console.log("Seeding database...");
+    // Note: Payment fees are now handled by Mayar.id
+    // No need to seed payment methods anymore
+    console.log("Seeding completed!");
+    console.log("Note: Payment processing is handled by Mayar.id");
+}
+seed().catch(console.error);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VlZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9zZWVkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxtQ0FBbUM7QUFDbkMsb0NBQW9DOztBQUlwQyxLQUFLLFVBQVUsSUFBSTtJQUNqQixPQUFPLENBQUMsR0FBRyxDQUFDLHFCQUFxQixDQUFDLENBQUM7SUFFbkMsaURBQWlEO0lBQ2pELDBDQUEwQztJQUUxQyxPQUFPLENBQUMsR0FBRyxDQUFDLG9CQUFvQixDQUFDLENBQUM7SUFDbEMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxpREFBaUQsQ0FBQyxDQUFDO0FBQ2pFLENBQUM7QUFFRCxJQUFJLEVBQUUsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLy8gRGF0YWJhc2Ugc2VlZGVyIGZvciBpbml0aWFsIGRhdGFcclxuLy8gUnVuIHdpdGg6IG5weCB0cy1ub2RlIHNyYy9zZWVkLnRzXHJcblxyXG5pbXBvcnQgeyBkYiB9IGZyb20gXCIuL2RiXCI7XHJcblxyXG5hc3luYyBmdW5jdGlvbiBzZWVkKCkge1xyXG4gIGNvbnNvbGUubG9nKFwiU2VlZGluZyBkYXRhYmFzZS4uLlwiKTtcclxuXHJcbiAgLy8gTm90ZTogUGF5bWVudCBmZWVzIGFyZSBub3cgaGFuZGxlZCBieSBNYXlhci5pZFxyXG4gIC8vIE5vIG5lZWQgdG8gc2VlZCBwYXltZW50IG1ldGhvZHMgYW55bW9yZVxyXG5cclxuICBjb25zb2xlLmxvZyhcIlNlZWRpbmcgY29tcGxldGVkIVwiKTtcclxuICBjb25zb2xlLmxvZyhcIk5vdGU6IFBheW1lbnQgcHJvY2Vzc2luZyBpcyBoYW5kbGVkIGJ5IE1heWFyLmlkXCIpO1xyXG59XHJcblxyXG5zZWVkKCkuY2F0Y2goY29uc29sZS5lcnJvcik7XHJcbiJdfQ==
