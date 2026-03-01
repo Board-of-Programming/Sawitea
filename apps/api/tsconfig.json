@@ -22,7 +22,9 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@sawitea/*": ["../../packages/*/src"]
+      "@sawitea/database": ["../../packages/database/src"],
+      "@sawitea/database/schema": ["../../packages/database/src/schema"],
+      "@sawitea/shared": ["../../packages/shared/src"]
     }
   }
 }
